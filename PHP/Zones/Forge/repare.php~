@@ -1,0 +1,42 @@
+<?php
+require_once('../../../Classes/hero.php');
+session_start();
+//if(!isset($_GET[id]) || is_numeric($_GET[id])) header('Location: forge.php');
+/*$pdo = new PDO('mysql:host=localhost;dbname=konta', 'root', 'lampa123', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$stmt = $pdo -> query("SELECT level, id_item, type_item, durability FROM ownership WHERE id=".$_GET['id']);
+$ownership = $stmt -> fetch();
+$stmt -> closeCursor();
+if($_SESSION['hero']['craftsmanship'] < ($ownership['level']+1)*10)
+{
+	$_SESSION['tech']['text'] = 'Za mało rzemiosła.<br> Potrzeba '.(($ownership['level']+1)*10).', a masz '.$_SESSION['hero']['craftsmanship'].'.';
+	header('Location: ../../../communication.php');
+}
+else 
+{
+	$stmt = $pdo -> query("SELECT durability FROM item_".$ownership['type_item']." WHERE id=".$ownership['id_item']);
+	$item = $stmt -> fetch();
+	$stmt -> closeCursor();
+   if($rand(1, 100) < 100 * $ownership['durability'] / $item['durability']);
+   {
+   	$_SESSION['tech']['text'] = 'Udało ci się naprawić przedmiot';
+   	$pdo -> exec("UPDATE ownership SET durability = ".$item['durability']." WHERE id = ".$_GET['id']);  
+	}
+	else 
+	{
+		$ownership['durability']	-= floor(0.25 * item['durability']);
+		if($ownership['durability'] > 0)
+		{
+			$_SESSION['tech']['text'] = 'Niestety pogorszyłeś stan przedmiotu. Ale z ciebie niezdara. Następnym razem bądź bardziej ostrożnym';			
+			$pdo -> exec("UPDATE ownership SET durability = ".$ownership['durability']." WHERE id = ".$_GET['id']);
+		}
+		else		
+		{
+			$_SESSION['tech']['text'] = 'Niestety zepsułeś przedmiot. Ale z ciebie niezdara. Następnym razem bądź bardziej ostrożnym';
+			$pdo -> exec("DELETE FROM ownership WHERE id = ".$_GET['id']);
+		}
+	}
+	header('Location: ../../../communication.php');
+}*/
+echo 's';
+?>

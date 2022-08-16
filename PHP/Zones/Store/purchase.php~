@@ -1,0 +1,42 @@
+<?php
+require_once('../../../Classes/hero.php');
+session_start();
+$pdo = new PDO('mysql:host=localhost;dbname=konta', 'root', 'lampa123', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+if(!isset($_GET['type']) || ($_GET['type'] != 'tool' && $_GET['type'] != 'ammo' && $_GET['type'] != 'armor' && $_GET['type'] != 'shield' && $_GET['type'] != 'weapon_melee' && $_GET['type'] != 'weapon_ranged') || !isset($_GET['id']) || !is_numeric($_GET['id'])) header('Location: vendor.php');
+else try
+{
+	$stmt = $pdo -> query("SELECT value, stack FROM item_".$_GET['type']." WHERE id=".$_GET['id']);
+      $item = $stmt -> fetch();
+      $stmt -> closeCursor();
+      if($_SESSION['hero']['cash'] < $item['value'])
+      {
+		$_SESSION['tech']['text'] = 'Za mało pieniędzy.<br> Potrzeba '.$item['value'].', a masz '.$_SESSION['hero']['cash'].'.';
+	}
+	else
+	{		
+		try
+		{     
+		      $stmt = $pdo -> query("SELECT durability FROM item_".$_GET['type']." WHERE id=".$_GET['id']);
+            $item2 = $stmt -> fetch();
+            $stmt -> closeCursor();
+            $durability = $item2['durability'];
+      }
+      catch(PDOException $e)
+      {
+            $durability = 'NULL';
+      }
+		echo $durability;
+      $pdo -> exec("INSERT INTO ownership (id_hero, type_item, id_item, amount, durability) VALUES ('".$_SESSION['hero']['id']."', '".$_GET['type']."', ".$_GET['id'].", ".$item['stack'].", ".$durability." )");
+		$_SESSION['hero']['cash'] -= $item['value'];
+		$_SESSION['tech']['text'] = 'Zakupiono';
+	}
+	//header('Location: ../../../communication.php');
+}
+catch(PDOException $e)
+{
+      //echo $e->getMessage();
+      $_SESSION['tech']['text'].= 'Błąd!';
+      header('Location: ../../../communication.php');
+}
+?>

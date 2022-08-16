@@ -1,0 +1,6 @@
+<?php
+function prize($ownership, $item, $arguments)
+{
+      echo '<td>'.(($item['value'] + $ownership['level']*$item['value_improve']) * $arguments).'</td>';
+}
+?>
