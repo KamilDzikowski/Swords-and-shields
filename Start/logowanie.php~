@@ -1,0 +1,85 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.batman.com">
+<LINK rel="stylesheet" href="../Style/style_strona.css" type="text/css"></LINK>
+<html xmlns="www.google.pl" xml:lang="pl" lang="pl">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="Description" content="Tu wpisz opis zawartości strony" />
+	<meta name="Keywords" content="Tu wpisz wyrazy kluczowe rozdzielone przecinkami" />
+	<title>Logowanie</title>
+</head>
+<div id="strona">
+	<form id="log_in" name="log_in"  method="post" action="logowanie.php">
+		Login:<input type="text" id="login" name="login"><br>
+		Hasło:<input type="text" id="password" name="password"><br>
+		<input type="submit" id="submit" value="Zatwierdź">
+	</form>
+	<a href="index.php">Powrót</a>
+	<div class="zle_dane">
+		<?php
+			require_once('../Klasy/postac.php');
+			session_start();
+			if(isset($_SESSION['postac'])) header('Location: miasto1.php'); //czy zaistnieć może(glowna)?
+			$_SESSION['tech']['path'] = 'Start/';
+			$_SESSION['tech']['file'] = 'log_in.php';
+			function loguj()
+			{
+				$login = $_POST['login'];
+				try
+   			{
+      			$pdo = new PDO('mysql:host=localhost;dbname=konta', 'root', 'lampa123', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+					$stmt = $pdo -> query("SELECT login, hasło FROM użytkownik WHERE login = '$login'");
+					$uzytkownik = $stmt -> fetch();
+					$stmt -> closeCursor();
+					if($uzytkownik == NULL)
+					{
+      				echo 'Błędny login!<br>';
+   				}
+   				else if($uzytkownik['hasło'] != $_POST['haslo'])
+   				{
+      				echo 'Błędne hasło!<br>';
+   				}
+   				else
+					{
+						$postac = CPostac::stworz($pdo, $login);
+						//sprawdzenie czy istnieje(bugi itd)
+						$pdo -> exec("UPDATE użytkownik SET przytomność = 1 WHERE login = '$login'");
+						$_SESSION['id'] = $postac['id'];
+						$akcja = $postac['akcja'];
+						if($akcja == NULL || $akcja == 0)
+						{
+							$_SESSION['tech_sciezka'] = '';
+							$_SESSION['tech_plik'] = 'miasto1.php';
+						}
+						else if($akcja == 1)
+						{
+							$_SESSION['tech_sciezka'] = 'PHP/Czynnosci/Praca/';
+							$_SESSION['tech_plik'] = 'pracowanie.php';
+						}
+						else if($akcja == 2)
+						{
+							$_SESSION['tech_sciezka'] = 'PHP/Czynnosci/Podroz/';
+							$_SESSION['tech_plik'] = 'podrozowanie.php';
+						}
+						else if($akcja == 3)
+						{
+							$_SESSION['tech_sciezka'] = 'PHP/Czynnosci/Swiatynia/';
+							$_SESSION['tech_plik'] = 'leczenie.php';
+						}
+						$_SESSION['tech_wazne'] = 0;
+						$_SESSION['postac'] = $postac;
+						$stmt -> closeCursor();
+						header('Location: ../'.$_SESSION['tech_sciezka'].$_SESSION['tech_plik']);
+      			}
+				}
+				catch(PDOException $e)
+				{
+      			echo 'Połączenie nie mogło zostać utworzone: ' . $e->getMessage();
+   			}
+			}
+			if($_SERVER['REQUEST_METHOD'] == 'POST') loguj();
+		?>
+	</div>
+</div>
+</html>

@@ -1,0 +1,29 @@
+#strona
+{
+	margin       : auto;
+   border       : none;
+   padding      : 0px;
+   width        : 798px;
+   text-align   : center;
+   background   : rgb(170, 170, 255);
+}
+#kolumnaLewa
+{
+   margin       : 0px;
+	border       : none;
+	padding      : 0px;
+	float        : left;
+	width        : 300px;
+	min-height   : 550px;
+   background   : rgb(170, 170, 255);
+}
+#kolumnaPrawa
+{
+   margin       : 0px;
+	border-left  : 2px solid black;
+	padding      : 0px;
+	float        : right;
+	min-height   : 551px;
+	width        : 496px;
+   background   : rgb(170, 170, 255);
+}

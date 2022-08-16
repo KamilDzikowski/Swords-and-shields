@@ -1,0 +1,45 @@
+#page
+{
+    margin     : auto;
+    padding    : 0px;
+    width      : 798px;
+    min-height : 551px;
+    text-align : center;
+    background : rgb(170, 170, 255);
+}
+#columnLeft
+{
+    margin     : 0px;
+    border     : 0px solid black;
+    padding    : 0px;
+    width      : 179px;
+    min-height : 551px;
+    float      : left;
+}
+#columnRight
+{
+    margin     : 0px;
+    border-left: 1px solid black;
+    padding    : 0px;
+    width      : 618px;
+    min-height : 551px;
+    float      : right;
+}
+#picture01
+{
+    margin     : 0px;
+    border     : 0px solid black;
+    padding    : 0px;
+    height     : 134px;
+}
+#menuVerticular
+{
+    margin     : 0px;
+    border     : 0px solid black;
+    padding    : 0px;
+    background : rgb(255, 180, 180);
+}
+.incorrectData
+{
+  	 color      : rgb(200, 0, 0);
+}

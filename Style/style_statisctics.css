@@ -1,0 +1,85 @@
+#page
+{
+      margin       : auto;
+      border       : none;
+      padding      : 0px;
+      width        : 798px;
+      text-align   : center;
+      background   : rgb(170, 170, 255);
+}
+#column-Left
+{
+      margin       : 0px;
+	border       : none;
+	padding      : 0px;
+	float        : left;
+	width        : 300px;
+	min-height   : 550px;
+      background   : rgb(170, 170, 255);
+}
+#column-Left-Top
+{
+      margin       : 0px;
+	border-bottom: 1px solid black;
+	padding      : 0px;
+	width        : 300px;
+	min-height   : 178px;
+      background   : rgb(170, 170, 255);
+}
+#column-Left-Left
+{
+      margin       : 0px;
+	border-bottom: 1px solid black;
+	padding      : 0px;
+	float        : left;
+	width        : 150px;
+	/*min-height   : 100px;*/
+      background   : rgb(170, 170, 255);
+}
+#column-Left-Right
+{
+      margin       : 0px;
+	border-left  : 1px solid black;
+	border-bottom: 1px solid black;
+	padding      : 0px;
+	float        : right;
+	width        : 149px;
+	/*min-height   : 100px;*/
+      background   : rgb(170, 170, 255);
+}
+#column-Left-Bottom
+{
+      margin       : 0px;
+	/*border-top   : 1px solid black;*/
+	border-bottom: 1px solid black;
+	padding      : 0px;
+	width        : 300px;
+	min-height   : 371px;
+      background   : rgb(170, 170, 255);
+}
+#column-Right
+{
+      margin       : 0px;
+	border-left  : 2px solid black;
+	padding      : 0px;
+	float        : right;
+	min-height   : 551px;
+	width        : 496px;
+      background   : rgb(170, 170, 255);
+}
+#tabs
+{
+	margin       : 0px;
+	border-bottom: 1px solid black;
+      padding      : 0px;
+      width        : 798px;
+      height       : 25px;
+      /*background   : rgb(70, 170, 255);*/
+}
+.item
+{
+	border-bottom: 1px solid black;
+	/*min-height   : 75px;
+	/*width        : 350px;
+      /*background   : rgb(10, 150, 10);*/
+}

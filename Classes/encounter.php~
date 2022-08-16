@@ -1,0 +1,68 @@
+<?php
+class CEncounter implements ArrayAccess
+{
+	private $potwor = array();
+  	private $pole_bitwy = array();
+ 	public function __construct()
+ 	{
+   	$pdo = new PDO('mysql:host=localhost;dbname=konta', 'root', 'lampa123', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    	$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    	$stmt = $pdo -> query("SELECT * FROM potwory WHERE id = 1");
+    	$this->potwor = $stmt -> fetch();
+    	$stmt -> closeCursor();
+    	$this->pole_bitwy['tura'] = 1;
+    	$this->pole_bitwy['gracz_kierunek'] = 1;
+    	$this->pole_bitwy['potwor_kierunek'] = -1;
+    	$this->pole_bitwy['gracz_pozycja'] = 5;
+    	$this->pole_bitwy['potwor_pozycja'] = 15;
+    	$this->pole_bitwy['rozmiar'] = 20;
+    	$this->pole_bitwy['gracz_ruch'] = 3;
+    	$this->pole_bitwy['potwor_ruch'] = 3;
+    	$this->potwor['zycie'] = $this->potwor['zycie_maks'];
+  	}
+  	public function offsetGet($key)
+  	{
+   	if(isset($this->potwor[$key])) return $this->potwor[$key];
+    	else if(isset($this->pole_bitwy[$key])) return $this->pole_bitwy[$key];
+   	else return false;
+  	}
+  	public function offsetSet($key, $value)
+  	{
+    	if(isset($this->potwor[$key])) return $this->potwor[$key] = $value;
+    	else return $this->pole_bitwy[$key] = $value;
+  	}
+  	public function offsetExists($key)
+  	{
+   	if(isset($this->potwor[$key])) return true;
+    	else if(isset($this->pole_bitwy[$key])) return true;
+   	else return false;
+  	}
+  	public function offsetUnset($key)
+  	{
+    	if(isset($this->potwor[$key]))
+    	{
+      	unset($this->potwor[$key]);
+      	return true;
+    	}
+    	else if(isset($this->pole_bitwy[$key]))
+    	{
+      	unset($this->pole_bitwy[$key]);
+      	return true;
+   	}
+    	else return false;
+  	}
+  	public function move()
+  	{
+  		$polozenie = $this->pole_bitwy['potwor_pozycja'];
+  		$kierunek = $this->pole_bitwy['potwor_kierunek'];
+  		if($kierunek == 1) if($this->pole_bitwy['gracz_pozycja'] > $polozenie) $cel = $this->pole_bitwy['gracz_pozycja'] - 1;
+					     		 else $cel = $this->pole_bitwy['rozmiar'];
+		else if($this->pole_bitwy['gracz_pozycja'] < $polozenie) $cel = $this->pole_bitwy['gracz_pozycja'] + 1;
+		else $cel = 0;
+		if(abs($polozenie - $cel) <= $this->pole_bitwy['potwor_ruch']) $this->pole_bitwy['potwor_pozycja'] = $cel;
+		else $_SESSION['encounter']['potwor_pozycja'] += $kierunek * $_SESSION['encounter']['potwor_ruch'];
+		if($_SESSION['encounter']['potwor_pozycja'] == $polozenie) return 0;
+		//if(abs())
+  	}
+}
+?>

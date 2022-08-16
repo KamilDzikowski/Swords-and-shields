@@ -1,0 +1,36 @@
+#page
+{
+	margin       : auto;
+   border       : 1px solid black;
+   padding      : 0px;
+   width        : 798px;
+   text-align   : center;
+   background   : rgb(170, 170, 255);
+}
+#headline
+{
+	margin       : 0px;
+	border-bottom: 3px solid black;
+   padding      : 0px;
+   width        : 798px;
+   text-align   : center;
+   background   : rgb(255, 255, 100);
+}
+#zakladki
+{
+	margin       : 0px;
+	border-bottom: 2px solid black;
+   padding      : 0px;
+   width        : 798px;
+   height       : 50px;
+   background   : rgb(70, 170, 255);
+}
+#footer
+{
+   margin       : 0px;
+	border-top   : 3px solid black;
+	padding      : 0px;
+	width        : 798;
+	clear        : both;
+   background   : rgb(255, 255, 100);
+}

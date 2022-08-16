@@ -1,0 +1,68 @@
+<?php
+class CPostac implements ArrayAccess
+{
+	static private $referencja;
+	static public function stworz($pdo, $login)
+	{
+		if(!isset(CPostac::$referencja))
+		{
+			CPostac::$referencja = new CPostac($pdo, $login);
+			return CPostac::$referencja;
+		}
+		else return CPostac::$referencja;
+	}
+	//////////////////
+	private $dane = array();
+  	private $dane_tymczasowe = array();
+ 	private function __construct($pdo, $login)
+ 	{
+ 	  	$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    	$stmt = $pdo -> query("SELECT * FROM postać WHERE login='$login'");
+		$this->dane = $stmt -> fetch();
+		$stmt -> closeCursor();
+		$pdo -> exec("UPDATE użytkownik SET przytomność = 1 WHERE login = '".$this->postac['login']."'");
+  	}
+	public function __destruct()
+	{
+		//zapisz();
+	}
+  	public function offsetGet($key)
+  	{
+    	if(isset($this->dane[$key])) return $this->dane[$key];
+    	else if(isset($this->dane_tymczasowe[$key])) return $this->dane_tymczasowe[$key];
+   	else return false;
+  	}
+  	public function offsetSet($key, $value)
+  	{
+    	if(isset($this->dane[$key])) return $this->dane[$key] = $value;
+    	else return $this->dane_tymczasowe[$key] = $value;
+  	}
+  	public function offsetExists($key)
+  	{
+   	if(isset($this->dane[$key])) return true;
+    	else if(isset($this->dane_tymczasowe[$key])) return true;
+   	else return false;
+  	}
+  	public function offsetUnset($key)
+  	{
+    	if(isset($this->dane[$key]))
+    	{
+      	unset($this->dane[$key]);
+      	return true;
+    	}
+    	else if(isset($this->dane_tymczasowe[$key]))
+    	{
+      	unset($this->dane_tymczasowe[$key]);
+      	return true;
+    	}
+    	else return false;
+  	}
+	public function zapisz()
+	{
+	 	$pdo = new PDO('mysql:host=localhost;dbname=konta', 'root', 'lampa123', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+		//$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	 	$pdo -> exec("UPDATE użytkownik SET przytomność = 0 WHERE login = '".$this->postac['login']."'");
+	 	foreach($this->dane as $indeks => $wartosc) $pdo -> exec("UPDATE postać SET $indeks = $wartosc WHERE id = ".$this->dane['id']);
+	}
+}
+?>

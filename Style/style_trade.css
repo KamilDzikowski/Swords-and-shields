@@ -1,0 +1,25 @@
+div.item
+{
+	border-bottom: 1px solid black;
+	/*min-height   : 75px;
+	/*width        : 350px;*/
+   /*background   : rgb(10, 150, 10);*/
+}
+#page
+{
+	margin       : auto;
+   border       : none;
+   padding      : 0px;
+   width        : 798px;
+   text-align   : center;
+   background   : rgb(170, 170, 255);
+}
+#tabs
+{
+	margin       : 0px;
+	border-bottom: 1px solid black;
+   padding      : 0px;
+   width        : 798px;
+   height       : 40px;
+   /*background   : rgb(70, 170, 255);*/
+}

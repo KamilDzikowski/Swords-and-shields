@@ -1,0 +1,66 @@
+#page
+{
+      margin       : auto;
+      border       : none;
+      padding      : 0px;
+      width        : 798px;
+      text-align   : center;
+      background   : rgb(170, 170, 255);
+}
+#Left
+{
+      margin       : 0px;
+	border       : none;
+	border-right : 2px solid black;
+	padding      : 0px;
+	float        : left;
+	min-height   : 550px;
+	width        : 250px;
+      background   : rgb(170, 170, 0);
+}
+#Right
+{
+      margin       : 0px;
+	padding      : 0px;
+	min-height   : 550px;
+	width        : 546px;
+	float        : right;
+      background   : rgb(170, 0, 100);
+}
+#RightLeft
+{
+      margin       : 0px;
+	padding      : 0px;
+	min-height   : 550px;
+	width        : 288px;
+	float        : left;
+      background   : rgb(170, 0, 100);
+}
+#RightRight
+{
+      margin       : 0px;
+	border-left  : 2px solid black;
+	padding      : 0px;
+	float        : right;
+	min-height   : 550px;
+	width        : 250px;
+      background   : rgb(170, 170, 0);
+}
+#RightLeftUp
+{
+      margin       : 0px;
+	padding      : 0px;
+	height       : 250px;
+	width        : 294px;
+      background   : rgb(200, 200, 200);
+}
+#RightLeftBottom
+{
+      margin       : 0px;
+	padding      : 0px;
+	clear        : both;
+	position     : bottom;
+	height       : 250px;
+	width        : 294px;
+      background   : rgb(0, 0, 0);
+}

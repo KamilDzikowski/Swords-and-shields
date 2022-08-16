@@ -1,0 +1,45 @@
+#strona
+{
+    margin     : auto;
+    padding    : 0px;
+    width      : 798px;
+    min-height : 551px;
+    text-align : center;
+    background : rgb(170, 170, 255);
+}
+#kolumnaLewa
+{
+    margin     : 0px;
+    border     : 0px solid black;
+    padding    : 0px;
+    width      : 179px;
+    min-height : 551px;
+    float      : left;
+}
+#kolumnaPrawa
+{
+    margin     : 0px;
+    border-left: 1px solid black;
+    padding    : 0px;
+    width      : 618px;
+    min-height : 551px;
+    float      : right;
+}
+#obrazokladka
+{
+    margin     : 0px;
+    border     : 0px solid black;
+    padding    : 0px;
+    height     : 134px;
+}
+#menuPion
+{
+    margin     : 0px;
+    border     : 0px solid black;
+    padding    : 0px;
+    background : rgb(255, 180, 180);
+}
+.zleDane
+{
+  	 color      : rgb(200, 0, 0);
+}
